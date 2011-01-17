@@ -2,7 +2,7 @@
 
 = Examples =
 
-Below is an example of how to setup a sample client:
+Below is an example of how to setup a sample client (w/o authentication):
 
 {{{
 class Program
@@ -10,9 +10,11 @@ class Program
         static void Main(string[] args)
         {
             MinecraftClient mc = new MinecraftClient("TestUser", "", new IPEndPoint(IPAddress.Parse("127.0.0.1"), 25565));
-            Console.WriteLine("Connecting...");
+
             mc.ConnectedToServer += new MinecraftClient.MinecraftClientEventHandler(mc_ConnectedToServer);
             mc.DisconnectedFromServer += new MinecraftClient.MinecraftClientEventHandler(mc_DisconnectedFromServer);
+
+            Console.WriteLine("Connecting...");            
             mc.Connect();
 
             Console.ReadLine();
