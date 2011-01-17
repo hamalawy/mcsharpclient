@@ -2,7 +2,7 @@
 
 = Examples =
 
-Below is an example of how to setup a sample client (w/o authentication):
+Below is an example of how to setup a sample client (w/o authentication). It connects, notifies on connect/disconnect, displays chat messages, and displays location updates.
 
 {{{
 class Program
