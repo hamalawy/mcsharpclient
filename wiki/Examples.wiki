@@ -10,15 +10,26 @@ class Program
         static void Main(string[] args)
         {
             MinecraftClient mc = new MinecraftClient("TestUser", "", new IPEndPoint(IPAddress.Parse("127.0.0.1"), 25565));
+            mc.ConnectedToServer += new MinecraftClient.MinecraftClientConnectEventHandler(mc_ConnectedToServer);
+            mc.DisconnectedFromServer += new MinecraftClient.MinecraftClientConnectEventHandler(mc_DisconnectedFromServer);
+            mc.ChatMessageReceived += new MinecraftClient.MinecraftClientChatEventHandler(mc_ChatMessageReceived);
+            mc.PlayerLocationChanged += new MinecraftClient.MinecraftClientLocationEventHandler(mc_PlayerLocationChanged);
 
-            mc.ConnectedToServer += new MinecraftClient.MinecraftClientEventHandler(mc_ConnectedToServer);
-            mc.DisconnectedFromServer += new MinecraftClient.MinecraftClientEventHandler(mc_DisconnectedFromServer);
-
-            Console.WriteLine("Connecting...");            
+            Console.WriteLine("Connecting...");
             mc.Connect();
 
             Console.ReadLine();
             Environment.Exit(0);
+        }
+
+        static void mc_PlayerLocationChanged(object sender, MinecraftClientLocationEventArgs args)
+        {
+            Console.WriteLine("X: " + args.PlayerLocation.X + " Y: " + args.PlayerLocation.Y + " Z: " + args.PlayerLocation.Z);
+        }
+
+        static void mc_ChatMessageReceived(object sender, MinecraftClientChatEventArgs args)
+        {
+            Console.WriteLine("<" + args.User + "> " + args.Message);
         }
 
         static void mc_DisconnectedFromServer(object sender, MinecraftClientConnectEventArgs args)
