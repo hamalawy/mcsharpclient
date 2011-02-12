@@ -14,7 +14,6 @@ class Program
             mc.ConnectedToServer += new MinecraftClient.MinecraftClientConnectEventHandler(mc_ConnectedToServer);
             mc.DisconnectedFromServer += new MinecraftClient.MinecraftClientDisconnectEventHandler(mc_DisconnectedFromServer);
             mc.ChatMessageReceived += new MinecraftClient.MinecraftClientChatEventHandler(mc_ChatMessageReceived);
-            mc.PlayerLocationChanged += new MinecraftClient.MinecraftClientLocationEventHandler(mc_PlayerLocationChanged);
 
             Console.WriteLine("Connecting...");
             mc.Connect();
